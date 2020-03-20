@@ -1,19 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-
-import { getData } from '../actions';
+import { putData } from '../actions';
 
 const SmurfsForm = props => {
-    const handleGetData = e => {
-        e.preventDefault();
-        props.getData();
+    const [smurfData, setSmurfData] = useState({
+        name: '',
+        age: '',
+        height: '',
+        id: ''
+    });
+
+    const handleChange = e => {
+        setSmurfData({
+            ...smurfData, [e.target.name] : e.target.value
+        })
     };
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        setSmurfData({...smurfData});
+        props.putData(smurfData);
+        setSmurfData({name: '', age: '', height: '', id: ''})
+        
+    }
+
     return (
         <div>
-            {props.isFetchingData ? (
+            {props.isPostingData ? (
                 <div>Smurftastic</div>
             ) : (
-                <button onClick={handleGetData}>Add A Smurf</button>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type='text'
+                        name='name'
+                        value={smurfData.name}
+                        onChange={handleChange}
+                        placeholder='Name'
+                    />
+
+                    <input
+                        type='text'
+                        name='age'
+                        value={smurfData.age}
+                        onChange={handleChange}
+                        placeholder='Age'
+                    />
+
+                    <input
+                        type='text'
+                        name='height'
+                        value={smurfData.height}
+                        onChange={handleChange}
+                        placeholder='Height'
+                    />
+                    <input type='submit' />
+                </form>
             )}
         </div>
     )
@@ -21,8 +62,8 @@ const SmurfsForm = props => {
 
 const mapStateToProps = state => {
     return {
-        isFetchingData: state.isFetchingData
+        isPostingData: state.isPostingData
     }
 }
 
-export default connect(mapStateToProps, { })(SmurfsForm);
+export default connect(mapStateToProps, { putData })(SmurfsForm);

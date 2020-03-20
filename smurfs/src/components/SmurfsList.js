@@ -7,7 +7,15 @@ const SmurfsList = props => {
             {props.error ? (
                 <div>{props.error}</div>
             ) : (
-            props.smurfs.map(smurf => <div>{smurf}</div>)
+                props.smurfs.map(smurf => (
+                    <div key={smurf.name}>
+                        <p>{smurf.name}</p>
+                        <p>{smurf.age}</p>
+                        <p>{smurf.height}</p>
+                    </div>
+                )
+            
+                )
             )}
         </div>
     )
