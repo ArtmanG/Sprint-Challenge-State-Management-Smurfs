@@ -1,14 +1,16 @@
-import { FETCH_DATA, UPDATE_SMURFS, SET_ERROR } from "../actions";
+import { GET_SMURFS, UPDATE_SMURFS, SET_ERROR, ADD_SMURF, DELETE_SMURF } from "../actions";
 
 const initialState = {
     smurfs: [],
     isFetchingData: false,
+    isPostingData: false,
+    isDeletingData: false,
     error: ''
 };
 
 export const appReducer = ( state = initialState, action) => {
     switch (action.type) {
-        case FETCH_DATA:
+        case GET_SMURFS:
             return {
                 ...state,
                 isFetchingData: true,
@@ -27,6 +29,18 @@ export const appReducer = ( state = initialState, action) => {
                 ...state,
                 isFetchingData: false,
                 error: action.payload
+            }
+
+        case ADD_SMURF:
+            return {
+                ...state,
+                isPostingData: true
+            }
+
+        case DELETE_SMURF:
+            return {
+                ...state,
+                isDeletingData: true
             }
 
         default:

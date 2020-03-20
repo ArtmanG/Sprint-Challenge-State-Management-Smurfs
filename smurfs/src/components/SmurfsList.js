@@ -1,7 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { gargamel } from '../actions'
 
 const SmurfsList = props => {
+
+    const handleDelete = id => {
+        props.gargamel(id)
+    };
+
     return (
         <div>
             {props.error ? (
@@ -28,4 +34,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, {})(SmurfsList);
+export default connect(mapStateToProps, { gargamel })(SmurfsList);

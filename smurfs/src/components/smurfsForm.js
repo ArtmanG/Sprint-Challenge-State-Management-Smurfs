@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { putData } from '../actions';
+import { addSmurf } from '../actions';
 
 const SmurfsForm = props => {
     const [smurfData, setSmurfData] = useState({
@@ -19,16 +19,13 @@ const SmurfsForm = props => {
     const handleSubmit = e => {
         e.preventDefault();
         setSmurfData({...smurfData});
-        props.putData(smurfData);
+        props.addSmurf(smurfData);
         setSmurfData({name: '', age: '', height: '', id: ''})
         
     }
 
     return (
         <div>
-            {props.isPostingData ? (
-                <div>Smurftastic</div>
-            ) : (
                 <form onSubmit={handleSubmit}>
                     <input
                         type='text'
@@ -55,7 +52,6 @@ const SmurfsForm = props => {
                     />
                     <input type='submit' />
                 </form>
-            )}
         </div>
     )
 }
@@ -66,4 +62,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { putData })(SmurfsForm);
+export default connect(mapStateToProps, { addSmurf })(SmurfsForm);

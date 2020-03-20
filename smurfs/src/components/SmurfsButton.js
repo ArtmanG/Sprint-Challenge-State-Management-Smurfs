@@ -1,19 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getData } from '../actions';
+import { getSmurfs } from '../actions';
 
 const SmurfsForm = props => {
     const handleGetData = e => {
         e.preventDefault();
-        props.getData();
+        props.getSmurfs();
     };
     return (
         <div>
-            {props.isFetchingData ? (
-                <div>Smurftastic</div>
-            ) : (
-                <button onClick={handleGetData}>Smurfs</button>
-            )}
+            <button onClick={handleGetData}>See Your Smurfs</button>
         </div>
     )
 }
@@ -24,4 +20,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { getData })(SmurfsForm);
+export default connect(mapStateToProps, { getSmurfs })(SmurfsForm);
